@@ -1,0 +1,56 @@
+doctype 5
+html(lang="en")
+  head
+    title= title
+    link(rel="stylesheet", href="style.css")
+    link(rel="stylesheet", href="normalize.css")
+    link(rel="stylesheet", href="tabla.css")
+    link(rel="stylesheet", href="bootstrap.min.css")
+    script(type='text/javascript')
+      function sumar () {
+        var a = document.getElementById("tema");  
+        var b = document.getElementById("objetivos");  
+        var c = document.getElementById("nota1");  
+        c.value = parseInt(a.value) + parseInt(b.value);}
+      
+
+  body()
+    #wrap
+      header
+        h1 Plataforma de Evaluación JUDC 2013
+
+      section
+        article#texto3
+          h1 Asignación de jurados JUDC
+          hr
+          form(method="post", enctype="multipart/form-data", name="frm1")
+            h2 Datos de los trabajos
+            p
+              label(for="Temadeinvestigación") Tema de investigación:
+                input(type="text", name="n3", size=200, value=usuarios.n3)
+            p
+              label(for="tema") Tema:
+                input(type="text", id="tema", size=200, value="")
+            p
+              label(for="objetivos") Objetivos:
+                input(type="text", id="objetivos", size=200,value="")
+            p
+              label(for="nota1") Nota:
+                input(type="text", name="nota1",id="nota1", size=200, value="")
+            p
+              input(type='button',onclick="sumar();", value='Sumar')
+            hr
+            button(type='submit', class='btn btn-primary') Mandar los datos        
+
+      content
+        nav
+          ul
+            li
+              a(href="/") Inicio
+            li 
+              a(href='/nuevo-trabajo') Inscripición
+            li
+              a(href='/admin') IR A LA PAGINA PRIVADA
+            li 
+              a(href='/pizzara') Pizarra
+        block text

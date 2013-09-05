@@ -1,0 +1,28 @@
+!!! 5
+html
+  head
+  link(rel="stylesheet", href="style.css")
+  script(type='text/javascript')
+    function sumar () {
+         var a = document.getElementById("nombre");  
+         var b = document.getElementById("password");  
+         var c = document.getElementById("resultado");  
+         c.value = parseInt(a.value) + parseInt(b.value);
+
+      }
+  body
+    h2 #{title}
+    form(name='MyForm')
+      p
+        label(for="nombre") Nombre:
+        input(type='text', name='nombre',id="nombre", value="")
+      p
+        label(for="password") Password:
+        input(type='text', name='password',id="password", size=100, value="")
+      p
+        label(for="resultado") Resultado:
+        input(type='text', name="resultado","id=resultado", value="")
+      p
+        input(type='submit',onclick="alert('Acabas de hacer click');return false;", value='Guardar')
+      p
+        input(type='button',onclick="sumar();", value='Sumar')

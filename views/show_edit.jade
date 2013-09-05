@@ -1,0 +1,44 @@
+doctype 5
+html(lang="en")
+  head
+    title= title
+    link(rel="stylesheet", href="style.css")
+ 
+  body
+    #wrap
+      header
+        h1 Plataforma de Evaluación JUDC 2013
+
+      section
+        article#texto3
+          h2 Editar Usuario
+          hr
+          form(method="post")
+            p
+              label(for="dato") Nombre:
+                input(type='text', name='dato', value=usuarios.dato)
+            p
+               label(for="nombre") Usuario:
+                input(type='text', name='nombre', value=usuarios.nombre)
+            p
+               label(for="dato") Password:
+                input(type='text', name='password', type='password', value=usuarios.password)
+            p
+              input(type='submit', value='Guardar')
+
+      content
+        nav
+          ul
+            li
+              a(href="/") Inicio
+            li 
+              a(href='/nuevo-trabajo') Inscripición
+            li
+              a(href='/admin') IR A LA PAGINA PRIVADA
+            li 
+              a(href='/pizzara') Pizarra
+        block text
+
+
+
+

@@ -1,0 +1,10 @@
+doctype 5
+html(lang="es")
+  head
+    meta(charset="utf-8")
+    title Inicio
+  body  
+    form(method="POST", enctype="multipart/form-data", action="/subir")
+      input(type="text", name="nombre")
+      input(type="file", name="archivo")
+      input(type="submit")

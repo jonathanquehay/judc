@@ -1,0 +1,70 @@
+doctype 5
+html(lang="en")
+  head
+    title= title
+    link(rel="stylesheet", href="style.css")
+    link(rel="stylesheet", href="normalize.css")
+    link(rel="stylesheet", href="tabla.css")
+    link(rel="stylesheet", href="bootstrap.min.css")
+    script(type='text/javascript')
+      function insertText(){
+        var mydate=new Date()
+        var theyear=mydate.getYear()
+        if (theyear < 1000)
+        theyear+=1900
+        var theday=mydate.getDay()
+        var themonth=mydate.getMonth()+1
+        if (themonth<10)
+        themonth="0"+themonth
+        var theday=mydate.getDate()
+        if (theday<10)
+        theday="0"+theday
+
+
+        var displayfirst=themonth
+        var displaysecond=theday
+        var displaythird=theyear
+        frm1.n2.value = displayfirst+"/"+displaysecond+"/"+displaythird; //asigna el texto al campo
+      }
+
+  body(onLoad="insertText();")
+    #wrap
+      header
+        h1 Plataforma de Evaluación JUDC 2013
+
+      section
+        article#texto3
+          h1 Asignación de jurados JUDC
+          hr
+          form(method="post", enctype="multipart/form-data", name="frm1")
+            h2 Datos de los trabajos
+            p
+              label(for="Temadeinvestigación") Tema de investigación:
+                input(type="text", name="n3", size=200, value=usuarios.n3)
+            p
+              label(for="Temadeinvestigación") Tema de investigación:
+                input(type="text", name="n3", size=200, value=usuarios.nombre)
+            p
+              label(for="j1") Jurado 1:
+                input(type="text", name="j1", size=200, value=usuarios.j1)
+            p
+              label(for="j2") Jurado 2:
+                input(type="text", name="j2", size=200, value=usuarios.j2)
+            p
+              label(for="j3") Jurado 3:
+                input(type="text", name="j3", size=200, value=usuarios.j3)
+            hr
+            button(type='submit', class='btn btn-primary') Mandar los datos        
+
+      content
+        nav
+          ul
+            li
+              a(href="/") Inicio
+            li 
+              a(href='/nuevo-trabajo') Inscripición
+            li
+              a(href='/admin') IR A LA PAGINA PRIVADA
+            li 
+              a(href='/pizzara') Pizarra
+        block text

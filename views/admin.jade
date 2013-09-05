@@ -1,0 +1,55 @@
+doctype 5
+html(lang="en")
+  head
+    title= title
+    link(rel="stylesheet", href="style.css")
+    link(rel="stylesheet", href="normalize.css")
+    link(rel="stylesheet", href="tabla.css")
+  body
+    #wrap
+      header
+        h1 Plataforma de Evaluación JUDC 2013
+
+      section
+        article#texto2
+          h1 Usuarios registrados
+          hr
+          h2
+            a(href='/nuevo-usuario') Nuevo Usuario
+            &nbsp;
+            &nbsp;
+            a(href='/salir') Cerrar Sesión
+            &nbsp;
+            a(href='/inscritos') Trabajos inscritos
+          table(border='0', cellpading='10', cellspacing='10', class='tabla')
+            tr
+              th Nombre
+              th Usuario
+              th Password
+              th Eliminar usuario
+              - if (usuarios)
+              - each usuario in usuarios
+                tr
+                  td
+                    a(href="/usuario/" + usuario._id.toString()) #{usuario.dato}
+                  td #{usuario.nombre}
+                  td #{usuario.password}
+                  td
+                    a(href="/delete-usuario/" + usuario._id.toString()) Borrar
+
+      content
+        nav
+          ul
+            li
+              a(href="/") Inicio
+            li 
+              a(href='/nuevo-trabajo') Inscripición
+            li
+              a(href='/admin') IR A LA PAGINA PRIVADA
+            li 
+              a(href='/pizarra') Pizarra
+        block text
+
+
+
+

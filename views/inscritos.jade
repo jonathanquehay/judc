@@ -1,0 +1,93 @@
+doctype 5
+html(lang="en")
+  head
+    title= title
+    link(rel="stylesheet", href="style.css")
+    link(rel="stylesheet", href="normalize.css")
+    link(rel="stylesheet", href="tabla.css")
+    script(type='text/javascript')
+      function redireccionar() {
+        setTimeout('document.location.reload()',20000);
+      }
+
+
+  body(onLoad="redireccionar();")
+    #wrap
+      header
+        h1 Plataforma de Evaluación JUDC 2013
+
+      section
+        article#texto2
+          h1 Usuarios registrados
+          hr
+          h2
+            a(href='/nuevo-trabajo') Nuevo Trabajo
+            &nbsp;
+            &nbsp;
+            a(href='/salir') Cerrar Sesión
+
+          table(border='0', cellpading='10', cellspacing='10', class='tabla')
+            tr
+              th Asigna
+              th Tema del trabajo
+              th Fecha
+              th Autor 1
+              th Autor 2
+              th Autor 3
+              th Línea de investigación
+              th Tutor(a)
+              th Asesor(a)
+              th Departamento al que pertenece
+              th Carrera
+              th Area de estudio
+              th Tipo de trabajo
+              th Jurado 1
+              th Jurado 2
+              th Jurado 3
+              th Informe
+              th Eliminar trabajo
+
+              - each inscrito in usuarios
+                tr
+                  td
+                    a(href="/asignar/" + inscrito._id.toString()) Asignar jurados
+                  td
+                    a(href="/inscrito/" + inscrito._id.toString()) #{inscrito.n3}
+                  td #{inscrito.n2}
+                  td #{inscrito.n_1}
+                  td #{inscrito.n_2}
+                  td #{inscrito.n_3}
+                  td #{inscrito.n4}
+                  td #{inscrito.n5}
+                  td #{inscrito.n6}
+                  td #{inscrito.n7}
+                  td #{inscrito.n8}
+                  td #{inscrito.n9}
+                  td #{inscrito.n10}
+                  td #{inscrito.evaluar.j1}
+                  td #{inscrito.evaluar.j2}
+                  td #{inscrito.evaluar.j3}
+                  td 
+                    a(href='./uploads/' + inscrito.n11) Ver informe
+                  td
+                    a(href="/borrar-inscrito/" + inscrito._id.toString()) Borrar
+              - each inscrito in usuarios
+                select(name="usuarios")
+                  option #{inscrito.nombre}
+
+      content
+        nav
+          ul
+            li
+              a(href="/") Inicio
+            li 
+              a(href='/nuevo-trabajo') Inscripición
+            li
+              a(href='/admin') IR A LA PAGINA PRIVADA
+            li 
+              a(href='/pizzara') Pizarra
+        block text
+
+
+
+

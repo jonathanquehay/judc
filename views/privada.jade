@@ -1,0 +1,25 @@
+h1 Usuarios registrados
+hr
+h2
+  a(href='/nuevo-usuario') Nuevo Usuario
+  &nbsp;
+  &nbsp;
+  a(href='/salir') Cerrar Sesión
+  a(href='/sumar') Sumar
+table(border='0', cellpading='10', cellspacing='10', class='tabla')
+  tr
+    th Usuario
+    th Password
+    th &nbsp;
+    th &nbsp;
+  - if (usuarios)
+    - each usuario in usuarios
+      tr
+        td
+          a(href="/usuario/" + usuario._id.toString()) #{usuario.nombre}
+        td #{usuario.password}
+        td #{usuario.dato}
+        td
+          a(href="/delete-usuario/" + usuario._id.toString()) Borrar
+
+

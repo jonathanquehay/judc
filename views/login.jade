@@ -1,0 +1,10 @@
+block content
+	h1= title
+	div
+		form(action='/autenticar', method='post')
+			label(for='txtUsuario')
+				input(type='text', id='txtUsuario', name='txtUsuario', placeholder='usuario')
+			label(for='txtClave')
+				input(type='password', id='txtClave', name='txtClave',placeholder='contraseña')
+			button(type='submit') Ingresar
+
