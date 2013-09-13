@@ -96,14 +96,7 @@ exports.asignardoc = function (req, res) {
   });
 });
 
-  /*function Irusuario (err, usuarios) {
-    if (err) {
-      console.log(err)
-      return next(err)
-    }
 
-    return res.render('asignar', {title: 'Ver Trabajos', usuarios: usuarios})
-  }*/
 }
 
 exports.asignarnot = function (req, res) {
@@ -307,6 +300,7 @@ exports.notas = function (req, res, next) {
               inscrito.evaluar.nota2=notas;
             }
 
+    inscrito.evaluar.promedio=Math.round((inscrito.evaluar.nota0+inscrito.evaluar.nota1+inscrito.evaluar.nota2)/3);
              
         
      // inscrito.n3    = n3
