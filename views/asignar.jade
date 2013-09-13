@@ -37,22 +37,22 @@ html(lang="en")
           h1 Asignación de jurados JUDC
           hr
           form(method="post", enctype="multipart/form-data", name="frm1")
-            h2 Datos de los trabajos
-            p
-              label(for="Temadeinvestigación") Tema de investigación:
-                input(type="text", name="n3", size=200, value=usuarios.n3)
-            p
-              label(for="Temadeinvestigación") Tema de investigación:
-                input(type="text", name="n3", size=200, value=usuarios.nombre)
+            h2 JURADOS
             p
               label(for="j1") Jurado 1:
-                input(type="text", name="j1", size=200, value=usuarios.j1)
+                select(name="j1")
+                  - each inscrito in usuarios
+                      option #{inscrito.nombre}
             p
               label(for="j2") Jurado 2:
-                input(type="text", name="j2", size=200, value=usuarios.j2)
+                select(name="j2")
+                  - each inscrito in usuarios
+                      option #{inscrito.nombre}
             p
               label(for="j3") Jurado 3:
-                input(type="text", name="j3", size=200, value=usuarios.j3)
+                select(name="j3")
+                  - each inscrito in usuarios
+                      option #{inscrito.nombre}
             hr
             button(type='submit', class='btn btn-primary') Mandar los datos        
 

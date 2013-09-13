@@ -21,8 +21,13 @@ html(lang="en")
                label(for="nombre") Usuario:
                 input(type='text', name='nombre', value=usuarios.nombre)
             p
-               label(for="dato") Password:
+               label(for="password") Password:
                 input(type='text', name='password', type='password', value=usuarios.password)
+            p
+              select(id="mesa", value=usuarios.mesa, name='mesa')
+                option Presidente
+                option Secretario
+                option Vocal
             p
               input(type='submit', value='Guardar')
 

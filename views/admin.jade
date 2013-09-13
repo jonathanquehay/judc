@@ -5,13 +5,14 @@ html(lang="en")
     link(rel="stylesheet", href="style.css")
     link(rel="stylesheet", href="normalize.css")
     link(rel="stylesheet", href="tabla.css")
+    link(rel="stylesheet", href="bootstrap.min.css")
   body
     #wrap
       header
         h1 Plataforma de Evaluación JUDC 2013
 
       section
-        article#texto2
+        article#container
           h1 Usuarios registrados
           hr
           h2
@@ -20,12 +21,14 @@ html(lang="en")
             &nbsp;
             a(href='/salir') Cerrar Sesión
             &nbsp;
+            &nbsp;
             a(href='/inscritos') Trabajos inscritos
-          table(border='0', cellpading='10', cellspacing='10', class='tabla')
+          table#table.table-hover
             tr
               th Nombre
               th Usuario
               th Password
+              th Tipo de jurado
               th Eliminar usuario
               - if (usuarios)
               - each usuario in usuarios
@@ -34,6 +37,7 @@ html(lang="en")
                     a(href="/usuario/" + usuario._id.toString()) #{usuario.dato}
                   td #{usuario.nombre}
                   td #{usuario.password}
+                  td #{usuario.mesa}
                   td
                     a(href="/delete-usuario/" + usuario._id.toString()) Borrar
 

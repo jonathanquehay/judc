@@ -5,11 +5,11 @@ html(lang="en")
     link(rel="stylesheet", href="style.css")
     link(rel="stylesheet", href="normalize.css")
     link(rel="stylesheet", href="tabla.css")
+    link(rel="stylesheet", href="bootstrap.min.css")
     script(type='text/javascript')
       function redireccionar() {
         setTimeout('document.location.reload()',20000);
       }
-
 
   body(onLoad="redireccionar();")
     #wrap
@@ -17,8 +17,8 @@ html(lang="en")
         h1 Plataforma de Evaluación JUDC 2013
 
       section
-        article#texto2
-          h1 Usuarios registrados
+        article#container
+          h1 Trabajos registrados
           hr
           h2
             a(href='/nuevo-trabajo') Nuevo Trabajo
@@ -26,11 +26,10 @@ html(lang="en")
             &nbsp;
             a(href='/salir') Cerrar Sesión
 
-          table(border='0', cellpading='10', cellspacing='10', class='tabla')
+          table#table.table-bordered
             tr
               th Asigna
               th Tema del trabajo
-              th Fecha
               th Autor 1
               th Autor 2
               th Autor 3
@@ -46,14 +45,13 @@ html(lang="en")
               th Jurado 3
               th Informe
               th Eliminar trabajo
-
-              - each inscrito in usuarios
+              - if(usuarios)
+              - each inscrito in docentes
                 tr
                   td
                     a(href="/asignar/" + inscrito._id.toString()) Asignar jurados
                   td
                     a(href="/inscrito/" + inscrito._id.toString()) #{inscrito.n3}
-                  td #{inscrito.n2}
                   td #{inscrito.n_1}
                   td #{inscrito.n_2}
                   td #{inscrito.n_3}
@@ -71,10 +69,6 @@ html(lang="en")
                     a(href='./uploads/' + inscrito.n11) Ver informe
                   td
                     a(href="/borrar-inscrito/" + inscrito._id.toString()) Borrar
-              - each inscrito in usuarios
-                select(name="usuarios")
-                  option #{inscrito.nombre}
-
       content
         nav
           ul

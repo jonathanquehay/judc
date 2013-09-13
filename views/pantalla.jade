@@ -8,28 +8,35 @@ html(lang="en")
     link(rel="stylesheet", href="bootstrap.min.css")
     script(type='text/javascript')
       function redireccionar() {
-        setTimeout('document.location.reload()',20000);
+        setTimeout('document.location.reload()',50000);
       }
 
 
-  body()
+  body(onLoad="redireccionar();")
     #wrap
       header
         h1 Plataforma de Evaluación JUDC 2013
 
       section
         article#container
-          h1 Tus trabajos asignados
-          hr
-          h2
-            a(href='/nuevo-trabajo') Nuevo Trabajo
-            &nbsp;
-            &nbsp;
-            a(href='/salir') Cerrar Sesión
+        form(action='/pantalla', method='post')
+          h1 Información en tiempo real
+          h3 Filtro según instrumento ->> 
+            select(id="trabajos", name='trabajos')
+              option Informe de investigación científica
+              option Ensayos
+              option Proyecto de Desarrollo
+              option Pre Defensa de monografia
+              option Protocolo
+              option Artículo Científico
+              option Software de aplicación y Sitios Web
+              option Procesos de enfermería
+              option Evaluación de Planes de Negocio
+              option Aplicaciones educativas, Proyectos Educativos basados en Tecnologías
+            button(type='submit', class='btn btn-primary') Filtrar 
 
           table#table
             tr
-              th Asigna
               th Tema del trabajo
               th Autor 1
               th Autor 2
@@ -44,16 +51,13 @@ html(lang="en")
               th Jurado 1
               th Jurado 2
               th Jurado 3
-              th Nota 1
-              th Nota 2
-              th Nota 3
-              th Promedio
-              th Informe
+              th Nota Presidente
+              th Nota Secretario
+              th Nota Vocal
+              th Nota Final
               - if (inscritos)
               - each inscrito in usuarios
                 tr
-                  td
-                    a(href="/notas/" + inscrito._id.toString()) Asignar notas
                   td #{inscrito.n3}
                   td #{inscrito.n_1}
                   td #{inscrito.n_2}
@@ -72,8 +76,7 @@ html(lang="en")
                   td #{inscrito.evaluar.nota1}
                   td #{inscrito.evaluar.nota2}
                   td #{inscrito.evaluar.promedio}
-                  td 
-                    a(href='./uploads/' + inscrito.n11) Ver informe
+
 
            
                

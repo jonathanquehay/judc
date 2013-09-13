@@ -49,6 +49,10 @@ app.get('/', usuario.index)
 
 app.get('/pizarra', usuario.pizarra)
 
+app.get('/pantalla', usuario.pantalla2)
+
+app.post('/pantalla',usuario.pantalla)
+
 app.get('/admin',login, usuario.admin)
 
 app.post('/autenticar',usuario.autenticar)
@@ -81,7 +85,7 @@ app.get('/asignar/:id', inscrito.asignardoc)
 
 app.get('/borrar-inscrito/:id', inscrito.borrar)
 
-app.get('/inscritos', inscrito.inscritos)
+app.get('/inscritos',login, inscrito.inscritos)
 
 app.get('/nuevo-trabajo', inscrito.inscribir)
 

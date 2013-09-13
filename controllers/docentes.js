@@ -6,7 +6,8 @@ var mongoose        = require('mongoose')
 var usuario_schema = mongoose.Schema({
   nombre        :   String,
   password   :   String,
-  dato: String
+  dato: String,
+  mesa: String
    
 })
 
@@ -16,7 +17,7 @@ var inscrito_schema = mongoose.Schema({
   n_2        :   String,
   n_3        :   String,
 
- docentes  : [usuario_schema],
+
  
   //fecha de inscripcion
   n2   :   String,
@@ -43,10 +44,10 @@ var inscrito_schema = mongoose.Schema({
             j1:String,
             j2:String,
             j3:String,
-            nota1:String,
-            nota2:String,
-            nota3:String,
-            promedio:String
+            nota0:Number,
+            nota1:Number,
+            nota2:Number,
+            promedio:Number
           }
   
   
@@ -77,7 +78,6 @@ var Inscrito = db.model('Inscrito', inscrito_schema)
 // }
 exports.pizarra = function (req, res) {
      Inscrito.find({"$or": [{"evaluar.j1": req.session.user}, {"evaluar.j2": req.session.user},{"evaluar.j3": req.session.user}]})
-      //.where('evaluar.j1').equals('Marcos')
       .exec(obtenerdatos);
       function obtenerdatos (err, usuarios){
         if (err){
@@ -95,8 +95,22 @@ exports.index = function (req, res) {
   
 }
 
+exports.pantalla2 = function (req, res) {
+ 
+ Inscrito.find({}, function (err, usuarios) {
+      return res.render('pantalla', {usuarios:usuarios})
+    });
 
+ 
+}
 
+exports.pantalla = function (req, res,next) {
+  var temp='Proyecto de Desarrollo'
+ Inscrito.find({n10:req.body.trabajos}, function (err, usuarios) {
+      return res.render('pantalla', {usuarios:usuarios})
+    });
+  
+}
 
 
 exports.admin = function (req, res, next) {
@@ -118,9 +132,16 @@ exports.admin = function (req, res, next) {
 
 //FUNCION PARA AUTENTICAR LA SESSION
 exports.autenticar=function(req, res){
-    Usuario.find({dato:req.body.txtUsuario, password:req.body.txtClave}, function (err, user) {
+    Usuario.find({dato:req.body.txtUsuario, password:req.body.txtClave,mesa:req.body.mesa}, function (err, user) {
       if(user.length > 0){
         req.session.user = req.body.txtUsuario;
+        req.session.mesa=req.body.mesa;
+        Usuario.find({}, function (err, usuarios) {
+          if(err) {
+            console.log(err);
+            return next()
+          }
+        });
         
         //res.redirect('/admin');
         //Inscrito.find();
@@ -151,7 +172,6 @@ exports.autenticar=function(req, res){
         req.session.user = req.body.txtUsuario;
         res.redirect('/admin');
       }
-      
 
       
     
@@ -204,6 +224,7 @@ exports.update = function (req, res, next) {
   var nombre      = req.body.nombre       || ''
   var password = req.body.password  || ''
   var dato = req.body.dato  || ''
+  var mesa = req.body.mesa;
   
   // Validemos que nombre o descripcion no vengan vacíos
   if ((nombre=== '') || (password === '')) {
@@ -228,6 +249,7 @@ exports.update = function (req, res, next) {
       usuario.nombre       = nombre
       usuario.password  = password
       usuario.dato  = dato
+      usuario.mesa= mesa
 
 
       usuario.save(onSaved)
@@ -294,6 +316,7 @@ exports.remove = function (req, res, next) {
  *
  * @url     GET       /nuevo-usuario
  */
+var fs=require('fs');
 exports.create = function (req, res, next) {
   if (req.method === 'GET') {
     return res.render('show_edit', {title: 'Nuevo Usuario', usuarios: {}})
@@ -302,6 +325,7 @@ exports.create = function (req, res, next) {
     var nombre      = req.body.nombre       || ''
     var password    =    req.body.password  || ''
     var dato    =    req.body.dato  || ''
+    var mesa    =    req.body.mesa;
     
 
     // Validemos que nombre o descripcion no vengan vacíos
@@ -309,24 +333,37 @@ exports.create = function (req, res, next) {
       console.log('ERROR: Campos vacios')
       return res.send('Hay campos vacíos, revisar')
     }
+/*fs.writeFile('./public/sample.txt', '\n' + nombre, function(error) {
+    console.log("Se ha escrito correctamente");
+});*/
+
+    fs.appendFileSync("./public/sample.txt", nombre.toString() +'\n');
+
+/*fs.readFileSync('./public/sample.txt').toString().split('\n').forEach(function (line) { 
+    fs.appendFileSync("./public/sample.txt",+ nombre.toString());
+  });*/
 
         // Creamos el documento y lo guardamos
     var usuario = new Usuario({
         nombre        : nombre
       , password   : password
       , dato   : dato
+      , mesa   : mesa
     })
 
+   
+
     usuario.save(onSaved)
+    
 
     function onSaved (err) {
       if (err) {
         console.log(err)
         return next(err)
       }
-
-      return res.redirect('/admin')
+     // return res.redirect('/index')
     }
+    return res.redirect('/admin')
   }  
 }
 

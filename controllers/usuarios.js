@@ -7,7 +7,8 @@ var mongoose        = require('mongoose')
 var usuario_schema = mongoose.Schema({
   nombre        :   {type:String, default:'Jonathan'},
   password   :   String,
-  dato: String
+  dato: String,
+  mesa: String
   
 })
 
@@ -19,8 +20,6 @@ var inscrito_schema = mongoose.Schema({
   n_2        :   String,
   n_3        :   String,
 
- docentes  : [usuario_schema],
- 
   //fecha de inscripcion
   n2   :   String,
   //tema de investigacion
@@ -46,12 +45,12 @@ var inscrito_schema = mongoose.Schema({
             j1:String,
             j2:String,
             j3:String,
-            nota1:String,
-            nota2:String,
-            nota3:String,
-            promedio:String
+            nota0:Number,
+            nota1:Number,
+            nota2:Number,
+            promedio:Number
           }
-  
+    
   
 })
 // Creación de variables para cargar el modelo
@@ -81,16 +80,30 @@ exports.asignardoc = function (req, res) {
   // Obtención del parámetro id desde la url
   var id = req.params.id
 
-  Inscrito.findById(id, Irusuario)
+  //Inscrito.findById(id, Irusuario)
 
-  function Irusuario (err, usuarios) {
+  Usuario.find({}, function (err, usuarios) {
+  if(err) {
+      console.log(err);
+      return next()
+  }
+  Inscrito.find({}, function (err, docentes) {
+    if(err) {
+      console.log(err);
+      return next()
+    }
+    res.render('asignar', {usuarios: usuarios,docentes: docentes});
+  });
+});
+
+  /*function Irusuario (err, usuarios) {
     if (err) {
       console.log(err)
       return next(err)
     }
 
     return res.render('asignar', {title: 'Ver Trabajos', usuarios: usuarios})
-  }
+  }*/
 }
 
 exports.asignarnot = function (req, res) {
@@ -112,19 +125,24 @@ exports.asignarnot = function (req, res) {
 
 exports.inscritos = function (req, res, next) {
 
-  Inscrito.find(Irusuario)
-
-  // NOTA: Creo que es bueno usar verbos en inglés para las funciones,
-  //       por lo cómodo que son en estos casos (get, got; find, found)
-  function Irusuario (err, usuarios) {
-    if (err) {
-      console.log(err)
+  //obj={a:usuarios, b:docentes};
+  //obj.find(Irusuario)
+ // var encontrados=0;
+Usuario.find({}, function (err, usuarios) {
+  if(err) {
+      console.log(err);
+      return next()
+  }
+  Inscrito.find({}, function (err, docentes) {
+    if(err) {
+      console.log(err);
       return next()
     }
+    res.render('inscritos', {usuarios: usuarios,docentes: docentes});
+  });
+});
 
-    return res.render('inscritos', {title: 'Lista de Trabajos', usuarios: usuarios})
-    //return res.render('inscritos', {title: 'Lista de Trabajos', docentes:docentes})
-  }
+
 }
 
 
@@ -219,18 +237,12 @@ exports.inscribir = function (req, res, next) {
 exports.asignar = function (req, res, next) {
   var id = req.params.id
       //sube archivos
-  var n3    =    req.body.n3  || ''
   var j1    =    req.body.j1  || ''
   var j2    =    req.body.j2  || ''
   var j3    =    req.body.j3;  
   
   // Validemos que nombre o descripcion no vengan vacíos
-  if (n3=== '') {
-    console.log('ERROR: Campos vacios')
-    return res.send('Hay algunos campos sin llenar, revisar')
-  }
-
-  Inscrito.findById(id, Irusuario)
+   Inscrito.findById(id, Irusuario)
 
   function Irusuario (err, inscrito) {
     if (err) {
@@ -242,7 +254,6 @@ exports.asignar = function (req, res, next) {
       console.log('ERROR: ID no existe')
       return res.send('ID Inválida!')
     } else {
-      inscrito.n3    = n3
       inscrito.evaluar.j1    = j1
       inscrito.evaluar.j2    = j2
       inscrito.evaluar.j3    = j3
@@ -265,12 +276,8 @@ exports.asignar = function (req, res, next) {
 
 exports.notas = function (req, res, next) {
   var id = req.params.id
-      //sube archivos
   var n3    =    req.body.n3  || ''
-  var nota1    =    req.body.nota1 || ''
-  var nota2    =    req.body.nota2 || ''
-  var nota3    =    req.body.nota3;  
-//  var j3    =    req.body.j3  || ''
+   notas=req.body.nota1;
   
   // Validemos que nombre o descripcion no vengan vacíos
   if (n3=== '') {
@@ -285,15 +292,27 @@ exports.notas = function (req, res, next) {
       console.log(err)
       return next(err)
     }
-
+    
     if (!inscrito) {
       console.log('ERROR: ID no existe')
       return res.send('ID Inválida!')
     } else {
-      inscrito.n3    = n3
-      inscrito.evaluar.nota1    = nota1
-      inscrito.evaluar.nota2    = nota2
-      inscrito.evaluar.nota3    = nota3
+            if (req.session.mesa=="Presidente"){
+              inscrito.evaluar.nota0=notas;
+            }
+            if (req.session.mesa=="Secretario"){
+              inscrito.evaluar.nota1=notas;
+            }
+            if (req.session.mesa=="Vocal"){
+              inscrito.evaluar.nota2=notas;
+            }
+
+             
+        
+     // inscrito.n3    = n3
+     // inscrito.evaluar.nota1    = notas[0]
+     // inscrito.evaluar.nota2    = 0
+     // inscrito.evaluar.nota3    = notas[2]
 
 
 

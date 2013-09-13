@@ -21,10 +21,10 @@ html(lang="en")
 
       section
         article#texto3
-          h1 Asignación de jurados JUDC
+          h1 Asignación de notas
           hr
           form(method="post", enctype="multipart/form-data", name="frm1")
-            h2 Datos de los trabajos
+            h2 Ubique la nota para el trabajo asignado
             p
               label(for="Temadeinvestigación") Tema de investigación:
                 input(type="text", name="n3", size=200, value=usuarios.n3)
@@ -40,7 +40,7 @@ html(lang="en")
             p
               input(type='button',onclick="sumar();", value='Sumar')
             hr
-            button(type='submit', class='btn btn-primary') Mandar los datos        
+            button#btn.btn-success(type='submit', class='btn btn-primary') Mandar los datos        
 
       content
         nav
