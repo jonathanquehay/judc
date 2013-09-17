@@ -20,11 +20,9 @@ html(lang="en")
       section
         article#container
           h1 Tus trabajos asignados
+          h2= title
           hr
           h2
-            a(href='/nuevo-trabajo') Nuevo Trabajo
-            &nbsp;
-            &nbsp;
             a(href='/salir') Cerrar Sesión
 
           table#table
@@ -85,10 +83,8 @@ html(lang="en")
               a(href="/") Inicio
             li 
               a(href='/nuevo-trabajo') Inscripición
-            li
-              a(href='/admin') IR A LA PAGINA PRIVADA
             li 
-              a(href='/pizzara') Pizarra
+              a(href='/pantalla') Pizarra
         block text
 
 

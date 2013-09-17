@@ -12,6 +12,14 @@ html(lang="en")
         var b = document.getElementById("objetivos");  
         var c = document.getElementById("nota1");  
         c.value = parseInt(a.value) + parseInt(b.value);}
+
+      var nav4 = window.Event ? true : false;
+      function acceptNum(evt){
+       // NOTE: Backspace = 8, Enter = 13, '0' = 48, '9' = 57
+        var key = nav4 ? evt.which : evt.keyCode;
+        return (key <= 13 || (key >= 48 && key <= 57));}
+     
+
       
 
   body()
@@ -28,6 +36,11 @@ html(lang="en")
             p
               label(for="Temadeinvestigación") Tema de investigación:
                 input(type="text", name="n3", size=200, value=usuarios.n3)
+            p   
+              select(id="mesa", name='mesa')
+                option Presidente
+                option Secretario
+                option Vocal
             p
               label(for="tema") Tema:
                 input(type="text", id="tema", size=200, value="")
@@ -36,7 +49,7 @@ html(lang="en")
                 input(type="text", id="objetivos", size=200,value="")
             p
               label(for="nota1") Nota:
-                input(type="text", name="nota1",id="nota1", size=200, value="")
+                input(type="text", name="nota1",id="nota1", value="", onkeypress="return acceptNum(event)", maxlength="3")
             p
               input(type='button',onclick="sumar();", value='Sumar')
             hr
@@ -49,8 +62,6 @@ html(lang="en")
               a(href="/") Inicio
             li 
               a(href='/nuevo-trabajo') Inscripición
-            li
-              a(href='/admin') IR A LA PAGINA PRIVADA
             li 
-              a(href='/pizzara') Pizarra
+              a(href='/pantalla') Pizarra
         block text

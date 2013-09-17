@@ -6,4 +6,8 @@
     , "jade"        : "*"
     , "mongoose"    : "*"
   }
+  , "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  }
 }

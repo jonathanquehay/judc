@@ -8,7 +8,6 @@ var usuario_schema = mongoose.Schema({
   nombre        :   {type:String, default:'Jonathan'},
   password   :   String,
   dato: String,
-  mesa: String
   
 })
 
@@ -221,7 +220,7 @@ exports.inscribir = function (req, res, next) {
         return next(err)
       }
 
-      return res.redirect('/inscritos')
+      return res.redirect('/pantalla')
     }
   }  
 }
@@ -270,7 +269,8 @@ exports.asignar = function (req, res, next) {
 exports.notas = function (req, res, next) {
   var id = req.params.id
   var n3    =    req.body.n3  || ''
-   notas=req.body.nota1;
+  mesa=req.body.mesa
+  notas=req.body.nota1;
   
   // Validemos que nombre o descripcion no vengan vacíos
   if (n3=== '') {
@@ -290,13 +290,13 @@ exports.notas = function (req, res, next) {
       console.log('ERROR: ID no existe')
       return res.send('ID Inválida!')
     } else {
-            if (req.session.mesa=="Presidente"){
+            if (mesa=="Presidente"){
               inscrito.evaluar.nota0=notas;
             }
-            if (req.session.mesa=="Secretario"){
+            if (mesa=="Secretario"){
               inscrito.evaluar.nota1=notas;
             }
-            if (req.session.mesa=="Vocal"){
+            if (mesa=="Vocal"){
               inscrito.evaluar.nota2=notas;
             }
 

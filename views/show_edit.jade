@@ -24,11 +24,6 @@ html(lang="en")
                label(for="password") Password:
                 input(type='text', name='password', type='password', value=usuarios.password)
             p
-              select(id="mesa", value=usuarios.mesa, name='mesa')
-                option Presidente
-                option Secretario
-                option Vocal
-            p
               input(type='submit', value='Guardar')
 
       content
@@ -41,7 +36,7 @@ html(lang="en")
             li
               a(href='/admin') IR A LA PAGINA PRIVADA
             li 
-              a(href='/pizzara') Pizarra
+              a(href='/pantalla') Pizarra
         block text
 
 

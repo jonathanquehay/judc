@@ -7,8 +7,7 @@ var usuario_schema = mongoose.Schema({
   nombre        :   String,
   password   :   String,
   dato: String,
-  mesa: String
-   
+  
 })
 
 var inscrito_schema = mongoose.Schema({
@@ -132,10 +131,9 @@ exports.admin = function (req, res, next) {
 
 //FUNCION PARA AUTENTICAR LA SESSION
 exports.autenticar=function(req, res){
-    Usuario.find({dato:req.body.txtUsuario, password:req.body.txtClave,mesa:req.body.mesa}, function (err, user) {
+    Usuario.find({dato:req.body.txtUsuario, password:req.body.txtClave}, function (err, user) {
       if(user.length > 0){
         req.session.user = req.body.txtUsuario;
-        req.session.mesa=req.body.mesa;
         Usuario.find({}, function (err, usuarios) {
           if(err) {
             console.log(err);
@@ -163,7 +161,7 @@ exports.autenticar=function(req, res){
         if (err){
           console.log(err);
         }
-          return res.render('pizarra', {usuarios:usuarios})
+          return res.render('pizarra', {title: "Bienvenido: " + req.session.user,usuarios:usuarios})
       }
       
     }

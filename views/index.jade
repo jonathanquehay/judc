@@ -13,10 +13,6 @@ html(lang="en")
               input(type='text', id='txtUsuario', name='txtUsuario', placeholder='usuario')
             label(for='txtClave')
               input(type='password', id='txtClave', name='txtClave', placeholder='contraseña')
-            select(id="mesa", name='mesa')
-              option Presidente
-              option Secretario
-              option Vocal
             button(type='submit', class='submit') Entrar
       section
         article#texto
@@ -38,8 +34,6 @@ html(lang="en")
               a(href="/") Inicio
             li 
               a(href="/nuevo-trabajo") Inscripición
-            li
-              a(href='/admin') IR A LA PAGINA PRIVADA
             li 
               a(href='/pantalla') Pizarra
         block text
