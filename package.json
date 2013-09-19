@@ -1,13 +1,17 @@
 {
-    "name": "herman-mongoose-suggestion"
-  , "version": "1.0.0"
-  , "dependencies": {
-      "express"     : "*"
-    , "jade"        : "*"
-    , "mongoose"    : "*"
-  }
-  , "engines": {
-    "node": "0.10.x",
-    "npm": "1.2.x"
-  }
+    "name": "herman-mongoose-suggestion",
+    "version": "1.0.0-1",
+    "dependencies": {
+        "express": "*",
+        "jade": "*",
+        "mongoose": "*"
+    },
+    "engines": {
+        "node": "0.10.x",
+        "npm": "1.2.x"
+    },
+    "subdomain": "judc2013",
+    "scripts": {
+        "start": "node app.js"
+    }
 }

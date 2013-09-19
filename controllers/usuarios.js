@@ -1,6 +1,6 @@
 // Creación de la Conexión
 var mongoose        = require('mongoose')
-  , db_lnk          = 'mongodb://localhost/judcdb'
+  , db_lnk          = 'mongodb://nodejitsu_jona83:vsrv9g66ugp94o4s3dfv0m2699@ds045998.mongolab.com:45998/nodejitsu_jona83_nodejitsudb4780776652'
   , db              = mongoose.createConnection(db_lnk)
 
 //var Schema = mongoose.Schema

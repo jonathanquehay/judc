@@ -1,6 +1,6 @@
 // Creación de la Conexión
 var mongoose        = require('mongoose')
-  , db_lnk          = 'mongodb://localhost/judcdb'
+  , db_lnk          = 'mongodb://nodejitsu_jona83:vsrv9g66ugp94o4s3dfv0m2699@ds045998.mongolab.com:45998/nodejitsu_jona83_nodejitsudb4780776652'
   , db              = mongoose.createConnection(db_lnk)
 
 var usuario_schema = mongoose.Schema({
@@ -166,7 +166,7 @@ exports.autenticar=function(req, res){
       
     }
 
-      if(req.body.txtUsuario=='jose' && req.body.txtClave=='1234'){
+      if(req.body.txtUsuario=='admin' && req.body.txtClave=='judcfarem*'){
         req.session.user = req.body.txtUsuario;
         res.redirect('/admin');
       }
