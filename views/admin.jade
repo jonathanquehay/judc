@@ -13,6 +13,7 @@ html(lang="en")
 
       section
         article#container
+        form(action='/pantalla', method='post')
           h1 Usuarios registrados
           hr
           h2
@@ -33,7 +34,7 @@ html(lang="en")
               - each usuario in usuarios
                 tr
                   td
-                    a(href="/usuario/" + usuario._id.toString()) #{usuario.dato}
+                    a(href="/usuario/" + usuario._id.toString(),style="color: #cc5500; font-size: 16px;font-weight:bold;text-align: center;") #{usuario.dato}
                   td #{usuario.nombre}
                   td #{usuario.password}
                   td
@@ -50,6 +51,9 @@ html(lang="en")
               a(href='/admin') IR A LA PAGINA PRIVADA
             li 
               a(href='/pantalla') Pizarra
+      footer 
+        i
+          &copy; 2013 | UNAN FAREM Chontales | Diseño y programación : Jonathán Moreno
         block text
 
 

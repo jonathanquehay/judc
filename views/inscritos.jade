@@ -8,7 +8,7 @@ html(lang="en")
     link(rel="stylesheet", href="bootstrap.min.css")
     script(type='text/javascript')
       function redireccionar() {
-        setTimeout('document.location.reload()',50000);
+        setTimeout('document.location.reload()',20000);
       }
 
   body(onLoad="redireccionar();")
@@ -21,10 +21,14 @@ html(lang="en")
           h1 Trabajos registrados
           hr
           h2
-            a(href='/nuevo-trabajo') Nuevo Trabajo
+            a(href='/nuevo-trabajo') Nuevo Trabajo |
             &nbsp;
             &nbsp;
-            a(href='/salir') Cerrar Sesión
+            a(href='/pizarra') Mostrar asignación de notas |
+            &nbsp;
+            &nbsp;
+            a(href='/salir') Cerrar Sesión 
+            
 
           table#table.table-bordered
             tr
@@ -33,16 +37,16 @@ html(lang="en")
               th Autor 1
               th Autor 2
               th Autor 3
-              th Línea de investigación
+              th Autor 4
               th Tutor(a)
               th Asesor(a)
               th Departamento al que pertenece
               th Carrera
-              th Area de estudio
               th Tipo de trabajo
               th Jurado 1
               th Jurado 2
               th Jurado 3
+              th Sala
               th Informe
               th Eliminar trabajo
               - if(usuarios)
@@ -55,18 +59,18 @@ html(lang="en")
                   td #{inscrito.n_1}
                   td #{inscrito.n_2}
                   td #{inscrito.n_3}
-                  td #{inscrito.n4}
+                  td #{inscrito.n_4}
                   td #{inscrito.n5}
                   td #{inscrito.n6}
                   td #{inscrito.n7}
                   td #{inscrito.n8}
-                  td #{inscrito.n9}
                   td #{inscrito.n10}
                   td #{inscrito.evaluar.j1}
                   td #{inscrito.evaluar.j2}
                   td #{inscrito.evaluar.j3}
+                  td #{inscrito.sala}
                   td 
-                    a(href='./uploads/' + inscrito.n11) Ver informe
+                    a(href='./uploads/' + inscrito.n11, target='_blank') Ver informe
                   td
                     a(href="/borrar-inscrito/" + inscrito._id.toString()) Borrar
       content
@@ -80,6 +84,9 @@ html(lang="en")
               a(href='/admin') IR A LA PAGINA PRIVADA
             li 
               a(href='/pantalla') Pizarra
+      footer 
+        i
+          &copy; 2013 | UNAN FAREM Chontales | Diseño y programación : Jonathán Moreno
         block text
 
 

@@ -39,30 +39,36 @@ html(lang="en")
           form(method="post", enctype="multipart/form-data", name="frm1")
             h2 JURADOS
             p
-              label(for="j1") Jurado 1:
-                select(name="j1")
+              label(for="j1", style="color: #ff0000; font-size: 18px;font-weight:bold;text-align: center;") Nombre del Jurado 1:
+                select(name="j1", (style="color: #000000; font-size: 20px;font-weight:bold;text-align: center;"))
                   - each inscrito in usuarios
-                      option #{inscrito.nombre}
+                      option #{inscrito.dato}
             p
-              label(for="j2") Jurado 2:
-                select(name="j2")
+              label(for="j2", style="color: #ff0000; font-size: 18px;font-weight:bold;text-align: center;") Nombre del Jurado 2:
+                select(name="j2", (style="color: #000000; font-size: 20px;font-weight:bold;text-align: center;"))
                   - each inscrito in usuarios
-                      option #{inscrito.nombre}
+                      option #{inscrito.dato}
             p
-              label(for="j3") Jurado 3:
-                select(name="j3")
+              label(for="j3", style="color: #ff0000; font-size: 18px;font-weight:bold;text-align: center;") Nombre del Jurado 3:
+                select(name="j3", (style="color: #000000; font-size: 20px;font-weight:bold;text-align: center;"))
                   - each inscrito in usuarios
-                      option #{inscrito.nombre}
+                      option #{inscrito.dato}
+            p
+              label(for="sala", style="color: #ff0000; font-size: 18px;font-weight:bold;text-align: center;") Sala a la que pertenece:
+                select(name="sala", (style="color: #000000; font-size: 20px;font-weight:bold;text-align: center;"))
+                    option Sala 1
+                    option Sala 2
+                    option Sala 3
+                    option Sala 4
+                    option Sala 5
+                    option Sala 6
+                    option Sala 7
+
             hr
-            button(type='submit', class='btn btn-primary') Mandar los datos        
+            button(type='submit', class='btn btn-primary', style="color: #000000; font-size: 30px;font-weight:bold;text-align: center;") Mandar los datos        
 
       content
-        nav
-          ul
-            li
-              a(href="/") Inicio
-            li 
-              a(href='/nuevo-trabajo') Inscripición
-            li 
-              a(href='/pantalla') Pizarra
+      footer 
+        i
+          &copy; 2013 | UNAN FAREM Chontales | Diseño y programación : Jonathán Moreno
         block text

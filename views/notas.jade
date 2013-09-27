@@ -34,34 +34,23 @@ html(lang="en")
           form(method="post", enctype="multipart/form-data", name="frm1")
             h2 Ubique la nota para el trabajo asignado
             p
-              label(for="Temadeinvestigación") Tema de investigación:
-                input(type="text", name="n3", size=200, value=usuarios.n3)
-            p   
-              select(id="mesa", name='mesa')
-                option Presidente
-                option Secretario
-                option Vocal
+              label(for="nota1", style="cursor: hand; color: #ff0000; font-family: Arial; text-decoration: underline;") Tema de investigación:
+                p
+                  input(type="text", name="n3", value=usuarios.n3, disabled, style="color: #000000; font-size: 18px;font-weight:bold;text-align: left;", size=150)
+            p 
+              label(for="nota1", style="cursor: hand; color: #ff0000; font-family: Arial; text-decoration: underline;") Tipo de jurado:   
+              p
+                select(id="mesa", name='mesa', style="color: #000000; font-size: 20px;font-weight:bold;text-align: center;")
+                  option Presidente
+                  option Secretario
+                  option Vocal
             p
-              label(for="tema") Tema:
-                input(type="text", id="tema", size=200, value="")
-            p
-              label(for="objetivos") Objetivos:
-                input(type="text", id="objetivos", size=200,value="")
-            p
-              label(for="nota1") Nota:
-                input(type="text", name="nota1",id="nota1", value="", onkeypress="return acceptNum(event)", maxlength="3")
-            p
-              input(type='button',onclick="sumar();", value='Sumar')
+              label(for="nota1", style="cursor: hand; color: #ff0000; font-family: Arial; text-decoration: underline;") Nota:
+                p
+                  input(type="text", name="nota1",id="nota1", value="", onkeypress="return acceptNum(event)", maxlength="3", style="color: #000000; font-size: 50px;font-weight:bold;text-align: center;")
             hr
-            button#btn.btn-success(type='submit', class='btn btn-primary') Mandar los datos        
+            button#btn.btn-success(type='submit', class='btn btn-primary', style="color: #000000; font-size: 30px;font-weight:bold;text-align: center;") Mandar los datos        
 
       content
-        nav
-          ul
-            li
-              a(href="/") Inicio
-            li 
-              a(href='/nuevo-trabajo') Inscripición
-            li 
-              a(href='/pantalla') Pizarra
+
         block text

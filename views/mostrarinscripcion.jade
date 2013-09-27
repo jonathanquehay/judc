@@ -42,38 +42,58 @@ html(lang="en")
               label(for="n2") Fecha de inscripción:
                 input(type="text", name="n2", size=11, value=usuarios.n2)
             p
-              label(for="Temadeinvestigación") Tema de investigación:
-                input(type="text", name="n3", size=200, value=usuarios.n3)
+              label(for="Temadeinvestigación") Tema de investigación:     *
+                input(type="text", name="n3", size=200, value=usuarios.n3) 
             p
             h3 Autores (Nombres y apellidos)
 
-              label(for="n_1") Integrante 1:
+              label(for="n_1") Autor 1:       *
                 input(type='text', name='n_1', value=usuarios.n_1, size=200)
-              label(for="n_2") Integrante 2:
+              label(for="n_2") Autor 2:
                 input(type='text', name='n_2', value=usuarios.n_2, size=200)
-              label(for="n_3") Integrante 3:
+              label(for="n_3") Autor 3:
                 input(type='text', name='n_3', value=usuarios.n_3, size=200)
-              label(for="n8") Carrera a la que pertenecen:
-                input(type='text', name='n8', value=usuarios.n8, size=200)
+              label(for="n_4") Autor 4:
+                input(type='text', name='n_3', value=usuarios.n_3, size=200)
+              label(for="n8") Carrera a la que pertenecen:       *
+                select(id="n8", value=usuarios.n8, name='n8')
+                  option Ing. en Sistemas de la información
+                  option Ing. Agroindustrial
+                  option Ing. Agronómica
+                  option Enfermería Materno-Infantil
+                  option Bioanálisis Clínico
+                  option Ing. Agronómica
+                  option Ciencias Ambientales
+                  option Informática Educativa
+                  option Contaduría Pública y Finanzas
+                  option Mercadotecnia
+                  option Administración de Empresas
+                  option Matemáticas
+                  option Ciencias Naturales
+                  option Ciencias Sociales
+                  option Inglés
+                  option Banca y Finanzas
+                  option Educación Infantil
+                  option Física - Matemática
+                  option Estudios Sociales
+                  option Biología
 
-            label.control-label(for="n7") Departamento al que pertenece
+            label.control-label(for="n7") Departamento al que pertenece      *
             #controls
               select(id="select01", value=usuarios.n7, name='n7')
                 option Ciencias, Tecnología y Salud
-                option Economía
-                option Humanidades
+                option Ciencias Económicas y Administrativas
+                option Ciencias de la Educación y Humanidades
             hr
             h2 Datos del trabajo
             label(for="n5") Tutor del trabajo:
                 input(type='text', name='n5', value=usuarios.n5, size=200)
-            label(for="n6") Asesor del trabajo:
+            label(for="n6") Asesor 1 del trabajo:
                 input(type='text', name='n6', value=usuarios.n6, size=200)
-            label(for="n9o") Area de estudio:
-                input(type='text', name='n9', value=usuarios.n9, size=200)
-            label(for="n4") Línea de investigación:
-                input(type='text', name='n4', value=usuarios.n4, size=200)
+            label(for="n_6") Asesor 2 del trabajo:
+                input(type='text', name='n_6', value=usuarios.n_6, size=200)
 
-            h3 Tipo de trabajo
+            h3 Tipo de trabajo  *
             #controls
               label.radio
               input(type="radio", name="n10", id="optionsRadios1", value="Informe de investigación científica")
@@ -110,15 +130,16 @@ html(lang="en")
             #controls
               input(class="input-file", type="file", name="miarchivo", value=usuarios.n11)
             hr
-            button(type='submit', class='btn btn-primary') Mandar los datos        
+            button(type='submit', style="color: #0000; font-size: 18px;text-align: center;") Enviar los datos        
 
       content
         nav
           ul
             li
               a(href="/") Inicio
-            li 
-              a(href='/nuevo-trabajo') Inscripición
-            li 
-              a(href='/pantalla') Pizarra
+
+
+      footer 
+        i
+          &copy; 2013 | UNAN FAREM Chontales | Diseño y programación : Jonathán Moreno
         block text

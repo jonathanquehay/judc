@@ -47,11 +47,13 @@ app.configure('production', function(){
 // Routes
 app.get('/', usuario.index)
 
-app.get('/pizarra', usuario.pizarra)
+app.get('/pizarra', login,usuario.pizarra)
 
-app.get('/pantalla', usuario.pantalla2)
+app.get('/pantalla', login, usuario.pantalla2)
 
-app.post('/pantalla',usuario.pantalla)
+app.post('/pantalla',login, usuario.pantalla)
+
+app.post('/pantallaadmin',login, usuario.pantallaadmin)
 
 app.get('/admin',login, usuario.admin)
 

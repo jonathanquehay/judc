@@ -15,28 +15,22 @@ html(lang="en")
           hr
           form(method="post")
             p
-              label(for="dato") Nombre:
-                input(type='text', name='dato', value=usuarios.dato)
+              label(for="dato",style="color: #ff0000; font-size: 18px;font-weight:bold;text-align: center;") Nombre:
+                input(type='text', name='dato', value=usuarios.dato, style="color: #000000; font-size: 20px;font-weight:bold;text-align: center;")
             p
-               label(for="nombre") Usuario:
-                input(type='text', name='nombre', value=usuarios.nombre)
+               label(for="nombre",style="color: #ff0000; font-size: 18px;font-weight:bold;text-align: center;") Usuario:
+                input(type='text', name='nombre', value=usuarios.nombre, style="color: #000000; font-size: 20px;font-weight:bold;text-align: center;", disabled)
             p
-               label(for="password") Password:
-                input(type='text', name='password', type='password', value=usuarios.password)
+               label(for="password",style="color: #ff0000; font-size: 18px;font-weight:bold;text-align: center;") Password:
+                input(type='text', name='password', type='password', value=usuarios.password, style="color: #000000; font-size: 20px;font-weight:bold;text-align: center;", disabled)
             p
-              input(type='submit', value='Guardar')
+              input(type='submit', value='Guardar',style="color: #000000; font-size: 30px;font-weight:bold;text-align: center;")
 
       content
-        nav
-          ul
-            li
-              a(href="/") Inicio
-            li 
-              a(href='/nuevo-trabajo') Inscripición
-            li
-              a(href='/admin') IR A LA PAGINA PRIVADA
-            li 
-              a(href='/pantalla') Pizarra
+        
+      footer 
+        i
+          &copy; 2013 | UNAN FAREM Chontales | Diseño y programación : Jonathán Moreno
         block text
 
 

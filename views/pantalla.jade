@@ -21,18 +21,15 @@ html(lang="en")
         article#container
         form(action='/pantalla', method='post')
           h1 Información en tiempo real
-          h3 Filtro según instrumento ->> 
-            select(id="trabajos", name='trabajos')
-              option Informe de investigación científica
-              option Ensayos
-              option Proyecto de Desarrollo
-              option Pre Defensa de monografia
-              option Protocolo
-              option Artículo Científico
-              option Software de aplicación y Sitios Web
-              option Procesos de enfermería
-              option Evaluación de Planes de Negocio
-              option Aplicaciones educativas, Proyectos Educativos basados en Tecnologías
+          h3 Filtro por SALAS ->> 
+            select(id="trabajos", name='trabajos', style="color: #5a6600; font-size: 16px;font-weight:bold;text-align: center;")
+                option Sala 1
+                option Sala 2
+                option Sala 3
+                option Sala 4
+                option Sala 5
+                option Sala 6
+                option Sala 7
             button(type='submit', class='btn btn-primary') Filtrar 
 
           table#table
@@ -41,16 +38,14 @@ html(lang="en")
               th Autor 1
               th Autor 2
               th Autor 3
-              th Línea de investigación
+              th Autor 4
               th Tutor(a)
-              th Asesor(a)
+              th Asesor(a) 1
+              th Asesor(a) 2
               th Departamento al que pertenece
               th Carrera
-              th Area de estudio
               th Tipo de trabajo
-              th Jurado 1
-              th Jurado 2
-              th Jurado 3
+              th Sala
               th Nota Presidente
               th Nota Secretario
               th Nota Vocal
@@ -58,24 +53,22 @@ html(lang="en")
               - if (inscritos)
               - each inscrito in usuarios
                 tr
-                  td #{inscrito.n3}
+                  td(style="color: #5a6600; font-size: 14px;font-weight:bold;text-align: center;")  #{inscrito.n3}
                   td #{inscrito.n_1}
                   td #{inscrito.n_2}
                   td #{inscrito.n_3}
-                  td #{inscrito.n4}
+                  td #{inscrito.n_4}
                   td #{inscrito.n5}
                   td #{inscrito.n6}
+                  td #{inscrito.n_6}
                   td #{inscrito.n7}
                   td #{inscrito.n8}
-                  td #{inscrito.n9}
                   td #{inscrito.n10}
-                  td #{inscrito.evaluar.j1}
-                  td #{inscrito.evaluar.j2}
-                  td #{inscrito.evaluar.j3}
+                  td #{inscrito.sala}
                   td #{inscrito.evaluar.nota0}
                   td #{inscrito.evaluar.nota1}
                   td #{inscrito.evaluar.nota2}
-                  td #{inscrito.evaluar.promedio}
+                  td(style="color: #0022ae; font-size: 20px;font-weight:bold;text-align: center;") #{inscrito.evaluar.promedio}
 
 
            
@@ -90,6 +83,9 @@ html(lang="en")
               a(href='/nuevo-trabajo') Inscripición
             li 
               a(href='/pantalla') Pizarra
+      footer 
+        i
+          &copy; 2013 | UNAN FAREM Chontales | Diseño y programación : Jonathán Moreno
         block text
 
 

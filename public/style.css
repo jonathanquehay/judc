@@ -63,6 +63,15 @@ header form {
      margin-bottom: -1px;
      font-size: 14px;
  }
+footer {
+
+   width: 700px;
+   margin: 0 auto;
+   padding: 35px 0 25px 0;
+   overflow: hidden;
+   font: 12px, Verdana, Helvetica, Arial, sans-serif;
+ 
+}
 nav
 {
 	background: rgba(0,0,0,0.8);
@@ -104,7 +113,7 @@ nav li a:hover
 
 }
 #texto{
-	background: rgba(0,0,0,0.6);
+	background: rgba(0,0,0,0.2);
 	border-radius: 0.5em;
 	box-shadow: rgba(0,0,0,0.5) 5px 5px 10px;
 	margin: 0 2% 6em 1em;

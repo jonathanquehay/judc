@@ -1,10 +1,10 @@
 // Creación de la Conexión
 var mongoose        = require('mongoose')
-  , db_lnk          = 'mongodb://nodejitsu_jona83:vsrv9g66ugp94o4s3dfv0m2699@ds045998.mongolab.com:45998/nodejitsu_jona83_nodejitsudb4780776652'
+  , db_lnk          = 'mongodb://localhost/judcdb'
   , db              = mongoose.createConnection(db_lnk)
 
 var usuario_schema = mongoose.Schema({
-  nombre        :   String,
+  nombre        :   {type:String},
   password   :   String,
   dato: String,
   
@@ -12,10 +12,10 @@ var usuario_schema = mongoose.Schema({
 
 var inscrito_schema = mongoose.Schema({
   //autores
-  n_1        :   String,
-  n_2        :   String,
-  n_3        :   String,
-
+  n_1        : { type: String,},
+  n_2        : {type:String},
+  n_3        : {type:String},
+  n_4        : {type:String},
 
  
   //fecha de inscripcion
@@ -23,21 +23,25 @@ var inscrito_schema = mongoose.Schema({
   //tema de investigacion
   n3 : String,
     //linea de investigacion
-  n4 : String,
+
     //tutor del trabajo
   n5 : String,
     //asesor del  trabajo
   n6 : String,
+      //asesor2 del  trabajo
+  n_6 : String,
     //Departamento
   n7 : String,
     //Carrera
   n8 : String,
-    //Area de estudio
-  n9 : String,
+
     //Tipos de trabajo
   n10 : String,
     //ruta de archivo informe
   n11 : String,
+
+  //sala a la que pertenece
+  sala: String,
 
   evaluar:{
             j1:String,
@@ -46,7 +50,7 @@ var inscrito_schema = mongoose.Schema({
             nota0:Number,
             nota1:Number,
             nota2:Number,
-            promedio:Number
+            promedio:String
           }
   
   
@@ -76,8 +80,10 @@ var Inscrito = db.model('Inscrito', inscrito_schema)
 //   }
 // }
 exports.pizarra = function (req, res) {
-     Inscrito.find({"$or": [{"evaluar.j1": req.session.user}, {"evaluar.j2": req.session.user},{"evaluar.j3": req.session.user}]})
+     //Inscrito.find({"$or": [{"evaluar.j1": req.session.user}, {"evaluar.j2": req.session.user},{"evaluar.j3": req.session.user}]})
+      Inscrito.find({})
       .exec(obtenerdatos);
+
       function obtenerdatos (err, usuarios){
         if (err){
           console.log(err);
@@ -96,18 +102,27 @@ exports.index = function (req, res) {
 
 exports.pantalla2 = function (req, res) {
  
- Inscrito.find({}, function (err, usuarios) {
+     Inscrito.find({}, function (err, usuarios) {
       return res.render('pantalla', {usuarios:usuarios})
-    });
+    }).sort({'evaluar.promedio':1});
 
  
 }
 
 exports.pantalla = function (req, res,next) {
-  var temp='Proyecto de Desarrollo'
- Inscrito.find({n10:req.body.trabajos}, function (err, usuarios) {
+
+ Inscrito.find({sala:req.body.trabajos}, function (err, usuarios) {
+      //Inscrito.find({}).sort({'evaluar.promedio':1})
       return res.render('pantalla', {usuarios:usuarios})
-    });
+    }).sort({'evaluar.promedio':1});
+  
+}
+
+exports.pantallaadmin = function (req, res,next) {
+ Inscrito.find({sala:req.body.trabajos}, function (err, usuarios) {
+      //Inscrito.find({}).sort({'evaluar.promedio':1})
+      return res.render('pizarra', {usuarios:usuarios})
+    }).sort({'evaluar.promedio':1});
   
 }
 
@@ -131,7 +146,7 @@ exports.admin = function (req, res, next) {
 
 //FUNCION PARA AUTENTICAR LA SESSION
 exports.autenticar=function(req, res){
-    Usuario.find({dato:req.body.txtUsuario, password:req.body.txtClave}, function (err, user) {
+    Usuario.find({nombre:req.body.txtUsuario, password:req.body.txtClave}, function (err, user) {
       if(user.length > 0){
         req.session.user = req.body.txtUsuario;
         Usuario.find({}, function (err, usuarios) {
@@ -147,7 +162,7 @@ exports.autenticar=function(req, res){
         obtenerdatos();
         
       }else{
-        res.send('El usuario no existe o sus datos son incorrectos.');
+        res.send('<h1>El usuario no existe o sus datos son incorrectos.</h1>');
       }
       function obtenerdatos (err, usuarios){
        //var dato=req.session.user;
@@ -166,9 +181,14 @@ exports.autenticar=function(req, res){
       
     }
 
-      if(req.body.txtUsuario=='admin' && req.body.txtClave=='judcfarem*'){
+      if(req.body.txtUsuario=='Admin' && req.body.txtClave=='judc2013*/-'){
         req.session.user = req.body.txtUsuario;
         res.redirect('/admin');
+      }
+
+      if(req.body.txtUsuario=='User' && req.body.txtClave=='2013judc-*/'){
+        req.session.user = req.body.txtUsuario;
+        res.redirect('/pizarra');
       }
 
       
@@ -219,15 +239,15 @@ exports.show_edit = function (req, res, next) {
 exports.update = function (req, res, next) {
   var id = req.params.id
 
-  var nombre      = req.body.nombre       || ''
-  var password = req.body.password  || ''
-  var dato = req.body.dato  || ''
-  var mesa = req.body.mesa;
+  var nombre      = req.body.nombre 
+  var password = req.body.password 
+  var dato = req.body.dato 
+
   
   // Validemos que nombre o descripcion no vengan vacíos
-  if ((nombre=== '') || (password === '')) {
+  if (dato=== '') {
     console.log('ERROR: Campos vacios')
-    return res.send('Hay campos vacíos, revisar')
+    return res.send('<h1>Hay campos vacíos, revisar</h1>')
   }
 
 
@@ -247,7 +267,7 @@ exports.update = function (req, res, next) {
       usuario.nombre       = nombre
       usuario.password  = password
       usuario.dato  = dato
-      usuario.mesa= mesa
+
 
 
       usuario.save(onSaved)
@@ -273,6 +293,9 @@ exports.update = function (req, res, next) {
  *
  * @url     GET       /delete-usuario/:id
  */
+
+ 
+
 exports.remove = function (req, res, next) {
   var id = req.params.id
 
@@ -288,8 +311,10 @@ exports.remove = function (req, res, next) {
       return res.send('Invalid ID. (De algún otro lado la sacaste tú...)')
     }
 
+
     // Tenemos el usuario, eliminemoslo
     usuario.remove(onRemoved)
+
   }
 
   function onRemoved (err) {
@@ -301,6 +326,9 @@ exports.remove = function (req, res, next) {
     return res.redirect('/admin')
     return res.redirect('/inscritos')
   }
+
+
+
 }
 
 
@@ -323,19 +351,19 @@ exports.create = function (req, res, next) {
     var nombre      = req.body.nombre       || ''
     var password    =    req.body.password  || ''
     var dato    =    req.body.dato  || ''
-    var mesa    =    req.body.mesa;
+
     
 
     // Validemos que nombre o descripcion no vengan vacíos
-    if ((nombre=== '') || (password === '')) {
+    if (dato=== '') {
       console.log('ERROR: Campos vacios')
-      return res.send('Hay campos vacíos, revisar')
+      return res.send('<h1>Hay campos vacíos, revisar</h1>')
     }
 /*fs.writeFile('./public/sample.txt', '\n' + nombre, function(error) {
     console.log("Se ha escrito correctamente");
 });*/
 
-    fs.appendFileSync("./public/sample.txt", nombre.toString() +'\n');
+   // fs.appendFileSync("./public/sample.txt", nombre.toString() +'\n');
 
 /*fs.readFileSync('./public/sample.txt').toString().split('\n').forEach(function (line) { 
     fs.appendFileSync("./public/sample.txt",+ nombre.toString());
@@ -346,7 +374,7 @@ exports.create = function (req, res, next) {
         nombre        : nombre
       , password   : password
       , dato   : dato
-      , mesa   : mesa
+
     })
 
    
